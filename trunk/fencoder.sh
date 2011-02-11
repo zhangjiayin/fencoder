@@ -20,7 +20,7 @@ fi
 
 cd $INSTALL_SDIR
 wget http://fencoder.googlecode.com/files/fencoder-extra.tar.gz
-tar xzvf fencoder-extra.tar.gz
+tar xzvf fencoder-extra.tar.gz -C $INSTALL_SDIR
 cd $SCRIPT_DIR
 
 #vars
