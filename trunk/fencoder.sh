@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-#vars
-_version="0.1"
 
 PID=$$
 LOG="/var/log/ffmepg_mencoder_all_in_one.log.${PID}"
@@ -9,6 +7,24 @@ INSTALL_SDIR='/usr/local/src/fencoder'
 #SOURCE_URL='http://mirror.ffmpeginstaller.com/source'
 INSTALL_DDIR='/usr/local/fencoder'
 SCRIPT_DIR=`dirname $(readlink -f $0)`
+
+
+if [[ $1 == "" ]];then
+    /usr/bin/env bash $0 go | tee $LOG
+    exit;
+fi
+
+if [[ ! -e $INSTALL_SDIR ]];then
+    mkdir -p $INSTALL_SDIR
+fi
+
+cd $INSTALL_SDIR
+wget http://fencoder.googlecode.com/files/fencoder-extra.tar.gz
+tar xzvf fencoder-extra.tar.gz
+cd $SCRIPT_DIR
+
+#vars
+_version="0.1"
 
 export CPU=`cat "/proc/cpuinfo" | grep "processor"|wc -l`
 export TMPDIR=$HOME/tmp
