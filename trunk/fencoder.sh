@@ -96,12 +96,12 @@ RE2C="re2c 0.13.5 http://downloads.sourceforge.net/project/re2c/re2c/0.13.5/re2c
 #V8
 LIBVPX="libvpx 0.9.5 http://webm.googlecode.com/files/libvpx-v0.9.5.tar.bz2  libvpx-v0.9.5.tar.bz2 libvpx-v0.9.5 ./configure  --prefix=$INSTALL_DDIR && make -j$cpu && make install"
 
-MPLAYER="mplayer -rc4 http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc4.tar.bz2 MPlayer-1.0rc4.tar.bz2  MPlayer-1.0rc4  ./configure --prefix=$INSTALL_DDIR  --codecsdir=$INSTALL_DDIR/lib/codecs/    --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --with-freetype-config=${INSTALL_DDIR}/bin/freetype-config   --yasm=/usr/local/cpffmpeg/bin/yasm  && make -j$cpu && make install"
+MPLAYER="mplayer -rc4 http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc4.tar.bz2 MPlayer-1.0rc4.tar.bz2  MPlayer-1.0rc4  ./configure --prefix=$INSTALL_DDIR  --codecsdir=$INSTALL_DDIR/lib/codecs/    --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --with-freetype-config=${INSTALL_DDIR}/bin/freetype-config   --yasm=${INSTALL_DDIR}/bin/yasm  && make -j$cpu && make install"
 
-FFMPEG="ffmpeg 0.6.1 http://ffmpeg.org/releases/ffmpeg-0.6.1.tar.bz2 MPlayer-1.0rc4.tar.bz2  ffmpeg  ./configure --prefix=$INSTALL_DDIR --enable-shared --enable-nonfree  --enable-gpl --enable-pthreads  --enable-libopencore-amrnb  --enable-decoder=liba52  --enable-libopencore-amrwb  --enable-libfaac  --enable-libmp3lame  --enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid  --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L/usr/local/cpffmpeg/lib  --enable-version3 && make -j$cpu && make tools/qt-faststart && make install && cp -vf tools/qt-faststart /usr/local/cpffmpeg/bin/  "
+FFMPEG="ffmpeg 0.6.1 http://ffmpeg.org/releases/ffmpeg-0.6.1.tar.bz2 MPlayer-1.0rc4.tar.bz2  ffmpeg  ./configure --prefix=$INSTALL_DDIR --enable-shared --enable-nonfree  --enable-gpl --enable-pthreads  --enable-libopencore-amrnb  --enable-decoder=liba52  --enable-libopencore-amrwb  --enable-libfaac  --enable-libmp3lame  --enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid  --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --enable-version3 && make -j$cpu && make tools/qt-faststart && make install && cp -vf tools/qt-faststart {$INSTALL_DDIR}/bin/  "
 
 #MP4Box is a MP4 multiplexer. It can import MPEG-4 video, DivX, XviD, 3ivx, h264 etc, audio streams and subtitles into the .mp4 container. The end result is a compliant MP4 stream. It can also extract streams from a .mp4. MP4Box is a command line tool, but can be used with graphical user interfaces such as YAMB.
-MP4BOX="gpac  0.4.5 http://downloads.sourceforge.net/project/gpac/GPAC/GPAC%200.4.5/gpac-0.4.5.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgpac%2F&ts=1297411317&use_mirror=citylan gpac-0.4.5.tar.gz gpac ./configure --prefix=/usr/local/cpffmpeg/ --extra-cflags=-I/usr/local/cpffmpeg/include/ --extra-ldflags=-L/usr/local/cpffmpeg/lib      --disable-wx --strip && make -j$cpu && make install"
+MP4BOX="gpac  0.4.5 http://downloads.sourceforge.net/project/gpac/GPAC/GPAC%200.4.5/gpac-0.4.5.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgpac%2F&ts=1297411317&use_mirror=citylan gpac-0.4.5.tar.gz gpac ./configure --prefix=${INSTALL_DDIR} --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib      --disable-wx --strip && make -j$cpu && make install"
 
 ARCh=`arch`
 #64bit processor bug fix
@@ -215,7 +215,7 @@ function install_all() {
 }
 
 echo -e "$GREEN"
-echo -n "Warting"
+echo -n "Waiting ...."
 echo -e "$RESET"
 #TODO
 sleep 10
