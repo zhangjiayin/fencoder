@@ -1,11 +1,10 @@
 #summary One-sentence summary of this page.
 
-= Introduction =
 
-installation: 
-svn checkout http://fencoder.googlecode.com/svn/trunk/ fencoder-read-only
-cd  fencoder-read-only
-./fecoder.sh
+==installation: ==
+  * svn checkout http://fencoder.googlecode.com/svn/trunk/ fencoder-read-only
+  * cd  fencoder-read-only
+  * ./fecoder.sh
 
 
 = Details =
