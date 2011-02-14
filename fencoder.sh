@@ -90,7 +90,7 @@ FREETYPE="freetype 2.4.4  http://download.savannah.gnu.org/releases/freetype/fre
 
 LIBWMF="libwmf 0.2.8.4 http://downloads.sourceforge.net/project/wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fwvware%2Ffiles%2Flibwmf%2F0.2.8.4%2F&ts=1297400919&use_mirror=citylan  libwmf-0.2.8.4.tar.gz libwmf-0.2.8.4 ./configure --prefix=$INSTALL_DDIR --with-freetype=$INSTALL_DDIR &&  make -j$CPU && make install"
 
-RUBY="ruby 1.9  ftp://ftp.ruby-lang.org//pub/ruby/1.9/ruby-1.9.2-p136.tar.gz ruby-1.9.2-p136.tar.gz ruby-1.9.2-p136 ./configure --prefix=$INSTALL_DDIR  && make -j$CPU  && make install"
+RUBY="ruby 1.8.7-p330  ftp://ftp.ruby-lang.org/pub/ruby/1.8/ruby-1.8.7-p330.tar.bz2 ruby-1.8.7-p330.tar.bz2 ruby-1.8.7-p330 ./configure --prefix=$INSTALL_DDIR  && make -j$CPU  && make install"
 
 FLVTOOL2="flvtool2 1.06  http://rubyforge.org/frs/download.php/17497/flvtool2-1.0.6.tgz flvtool2-1.0.6.tgz flvtool2-1.0.6 ${INSTALL_DDIR}/bin/ruby setup.rb config && ${INSTALL_DDIR}/bin/ruby setup.rb setup && ${INSTALL_DDIR}/bin/ruby setup.rb install"
 
@@ -187,9 +187,9 @@ function pre_setup() {
 
     if [ $APT_ENABLE == 1 ];then
         echo "Ensuring Debian packages ....."
-        apt-get install gcc libgd-dev gettext libfreetype6 libfreetype6-dev libpng-dev libstdc++-dev \
-            libtiff-dev libtool libxml2 libxml2-dev automake autoconf libncurses-dev ncurses-dev patch \
-            make -y
+      #  apt-get install gcc libgd-dev gettext libfreetype6 libfreetype6-dev libpng-dev libstdc++-dev \
+      #      libtiff-dev libtool libxml2 libxml2-dev automake autoconf libncurses-dev ncurses-dev patch \
+      #      make -y
     fi
     
     #process tmp dir
@@ -235,12 +235,11 @@ function install_all() {
         install_command=""
         index=0
         while [[ "$index" -lt "$package_cnt" ]];
-
         do
             if [[ $index -gt 4 ]];then
                 install_command="${install_command} ${package[$index]}"
             fi
-            ((index++))
+            let index=index+1
         done
         
         #extract package
