@@ -103,7 +103,7 @@ LIBOGG="libogg 1.2.2 http://downloads.xiph.org/releases/ogg/libogg-1.2.2.tar.gz 
 
 LIBVORBIS="libvorbis 1.3.2 http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.2.tar.bz2 libvorbis-1.3.2.tar.bz2 libvorbis-1.3.2  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
 
-VORBISTOOLS="vorbis-tools 1.4.0 http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
+VORBISTOOLS="vorbis-tools 1.2.0 http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
 
 #免费的视频压缩编码技术 ，从VP3 HD高清到MPEG-4/DiVX格式都能够被Theora很好的支持
 LIBTHEORA="libtheora  1.1.1 http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 libtheora-1.1.1.tar.bz2 libtheora-1.1.1 ./configure --prefix=$INSTALL_DDIR --with-ogg=$INSTALL_DDIR --with-vorbis=$INSTALL_DDIR  && make -j$CPU  && make install"  
@@ -216,7 +216,7 @@ function install_all() {
     for package_var in ${packages[@]}
     do
 
-        if [[ -z ${package_var} ]];
+        if [[ -z ${package_var} ]];then
             continue;
         fi
 
@@ -259,7 +259,7 @@ function install_all() {
         eval $install_command
         ldconfig
        
-        echo -e $BLUE"Installation of $_package ....... Completed"$RESET
+        echo -e $BLUE"Installation of ${package[0]} ....... Completed"$RESET
         sleep 2
     done
 }
