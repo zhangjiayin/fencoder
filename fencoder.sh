@@ -216,7 +216,7 @@ function install_all() {
     for package_var in ${packages[@]}
     do
 
-        if [[ -z ${package_var} ]];then
+        if [[ -z ${!package_var} ]];then
             continue;
         fi
 
@@ -269,6 +269,7 @@ echo -n "Waiting ...."
 echo -e "$RESET"
 #TODO
 sleep 10
+pre_setup
 install_all
 
 
