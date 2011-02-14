@@ -6,7 +6,7 @@
 #TODO check exists package
 
 PID=$$
-LOG="/var/log/ffmepg_mencoder_all_in_one.log.${PID}"
+LOG="/var/log/fencode.log"
 
 INSTALL_SDIR='/usr/local/src/fencoder'
 INSTALL_DDIR='/usr/local/fencoder'
@@ -96,14 +96,14 @@ FLVTOOL2="flvtool2 1.06  http://rubyforge.org/frs/download.php/17497/flvtool2-1.
 
 LAME="lame 3.98.4 http://downloads.sourceforge.net/project/lame/lame/3.98.4/lame-3.98.4.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Flame%2Ffiles%2Flame%2F3.98.4%2F&ts=1297402992&use_mirror=softlayer lame-3.98.4.tar.gz lame-3.98.4 ./configure  --prefix=$INSTALL_DDIR --enable-mp3x --enable-mp3rtp && make -j$CPU  && make install"
 
-CODECS="codecs 20110131 http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2 all-20110131.tar.bz2 all-20110131 mkdir -pv $INSTALL_DDIR/lib/codecs/ && cp -vrf all-20110131/* $INSTALL_DDIR/lib/codecs/ && chmod -R 755 ${INSTALL_DDIR}/lib/codecs/"
+CODECS="codecs 20110131 http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2 all-20110131.tar.bz2 all-20110131 mkdir -pv $INSTALL_DDIR/lib/codecs/ && cp -vrf ./ $INSTALL_DDIR/lib/codecs/ && chmod -R 755 ${INSTALL_DDIR}/lib/codecs/"
 
 # OGG VORBIS 无损压缩格式
 LIBOGG="libogg 1.2.2 http://downloads.xiph.org/releases/ogg/libogg-1.2.2.tar.gz libogg-1.2.2.tar.gz libogg-1.2.2  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
 
 LIBVORBIS="libvorbis 1.3.2 http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.2.tar.bz2 libvorbis-1.3.2.tar.bz2 libvorbis-1.3.2  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
 
-VORBISTOOLS="vorbis-tools 1.2.0 http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0.tar.gz vorbis-tools-1.4.0  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
+VORBISTOOLS="vorbis-tools 1.2.0 http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.2.0.tar.gz vorbis-tools-1.2.0.tar.gz vorbis-tools-1.2.0  ./configure --prefix=$INSTALL_DDIR && make -j$CPU  && make install"  
 
 #免费的视频压缩编码技术 ，从VP3 HD高清到MPEG-4/DiVX格式都能够被Theora很好的支持
 LIBTHEORA="libtheora  1.1.1 http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2 libtheora-1.1.1.tar.bz2 libtheora-1.1.1 ./configure --prefix=$INSTALL_DDIR --with-ogg=$INSTALL_DDIR --with-vorbis=$INSTALL_DDIR  && make -j$CPU  && make install"  
@@ -125,10 +125,10 @@ A52DEC="a52dec 0.7.4 http://liba52.sourceforge.net/files/a52dec-0.7.4.tar.gz a52
 
 #FAAC is an Advanced Audio Coder (MPEG2-AAC, MPEG4-AAC). The goal of FAAC is to explore the possibilities of AAC and exceed the quality of the currently best MP3 encoders.
 #Advanced Audio Coding (AAC) is a standardized, lossy compression and encoding scheme for digital audio. Designed to be the successor of the MP3 format, AAC generally achieves better sound quality than MP3 at similar bit rates
-FAAC="FAAC 1.28 http://downloads.sourceforge.net/faac/faac-1.28.tar.bz2 faac-1.28.tar.bz2 faac-1.28 ./bootstrap && ./configure --prefix=$INSTALL_DDIR  --with-mp4v2 && make -j$cpu && make install"
+FAAC="FAAC 1.28 http://downloads.sourceforge.net/faac/faac-1.28.tar.bz2 faac-1.28.tar.bz2 faac-1.28 aclocal && ./bootstrap && ./configure --prefix=$INSTALL_DDIR  --with-mp4v2 && make -j$cpu && make install"
 
 #AAD2 is Freeware Advanced Audio (AAC) Decoder including SBR decoding
-FAAD2="FAAD2 2.7 http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2 faad2-2.7.tar.bz2 faad2-2.7 ./bootstrap && ./configure --prefix=$INSTALL_DDIR  --with-mpeg4ip && make -j$cpu && make install"
+FAAD2="FAAD2 2.7 http://downloads.sourceforge.net/faac/faad2-2.7.tar.bz2 faad2-2.7.tar.bz2 faad2-2.7 aclocal && chmod +x bootstrap && ./bootstrap && ./configure --prefix=$INSTALL_DDIR  --with-mpeg4ip && make -j$cpu && make install"
 
 YASM="YASM 1.1.0 http://www.tortall.net/projects/yasm/releases/yasm-1.1.0.tar.gz yasm-1.1.0.tar.gz  yasm-1.1.0  ./configure --prefix=$INSTALL_DDIR && make -j$cpu && make install"
 
@@ -147,11 +147,13 @@ RE2C="re2c 0.13.5 http://downloads.sourceforge.net/project/re2c/re2c/0.13.5/re2c
 LIBVPX="libvpx 0.9.5 http://webm.googlecode.com/files/libvpx-v0.9.5.tar.bz2  libvpx-v0.9.5.tar.bz2 libvpx-v0.9.5 ./configure  --prefix=$INSTALL_DDIR && make -j$cpu && make install"
 
 MPLAYER="mplayer -rc4 http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc4.tar.bz2 MPlayer-1.0rc4.tar.bz2  MPlayer-1.0rc4  ./configure --prefix=$INSTALL_DDIR  --codecsdir=$INSTALL_DDIR/lib/codecs/    --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --with-freetype-config=${INSTALL_DDIR}/bin/freetype-config   --yasm=${INSTALL_DDIR}/bin/yasm  && make -j$cpu && make install && cp -f etc/codecs.conf $INSTALL_DDIR/etc/mplayer/codecs.conf"
+MPLAYER="mplayer -rc4 http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc4.tar.bz2 MPlayer-1.0rc4.tar.bz2  MPlayer-1.0rc4  ./configure --prefix=$INSTALL_DDIR  --codecsdir=$INSTALL_DDIR/lib/codecs/    --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --with-freetype-config=${INSTALL_DDIR}/bin/freetype-config   --yasm=${INSTALL_DDIR}/bin/yasm  && make  && make install && cp -f etc/codecs.conf $INSTALL_DDIR/etc/mplayer/codecs.conf"
 
-FFMPEG="ffmpeg 0.6.1 http://ffmpeg.org/releases/ffmpeg-0.6.1.tar.bz2 MPlayer-1.0rc4.tar.bz2  ffmpeg  ./configure --prefix=$INSTALL_DDIR --enable-shared --enable-nonfree  --enable-gpl --enable-pthreads  --enable-libopencore-amrnb  --enable-decoder=liba52  --enable-libopencore-amrwb  --enable-libfaac  --enable-libmp3lame  --enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid  --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --enable-version3 && make -j$cpu && make tools/qt-faststart && make install && cp -vf tools/qt-faststart {$INSTALL_DDIR}/bin/  "
+FFMPEG="ffmpeg 0.6.1 http://ffmpeg.org/releases/ffmpeg-0.6.1.tar.bz2 ffmpeg-0.6.1.tar.bz2 ffmpeg-0.6.1 ./configure --prefix=${INSTALL_DDIR} --enable-shared --enable-nonfree  --enable-gpl --enable-pthreads  --enable-libopencore-amrnb  --enable-decoder=liba52  --enable-libopencore-amrwb  --enable-libfaac  --enable-libmp3lame  --enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid  --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --enable-version3 && make -j$cpu && make tools/qt-faststart && make install && cp -vf tools/qt-faststart {$INSTALL_DDIR}/bin/  "
+FFMPEG="ffmpeg 0.6.1 http://ffmpeg.org/releases/ffmpeg-0.6.1.tar.bz2 ffmpeg-0.6.1.tar.bz2 ffmpeg-0.6.1 ./configure --prefix=${INSTALL_DDIR} --enable-shared --enable-nonfree  --enable-gpl --enable-pthreads  --enable-libopencore-amrnb  --enable-decoder=liba52  --enable-libopencore-amrwb  --enable-libfaac  --enable-libmp3lame  --enable-libtheora --enable-libvorbis  --enable-libx264  --enable-libxvid  --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib  --enable-version3 && make  && make tools/qt-faststart && make install && cp -vf tools/qt-faststart {$INSTALL_DDIR}/bin/  "
 
 #MP4Box is a MP4 multiplexer. It can import MPEG-4 video, DivX, XviD, 3ivx, h264 etc, audio streams and subtitles into the .mp4 container. The end result is a compliant MP4 stream. It can also extract streams from a .mp4. MP4Box is a command line tool, but can be used with graphical user interfaces such as YAMB.
-MP4BOX="gpac  0.4.5 http://downloads.sourceforge.net/project/gpac/GPAC/GPAC%200.4.5/gpac-0.4.5.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgpac%2F&ts=1297411317&use_mirror=citylan gpac-0.4.5.tar.gz gpac ./configure --prefix=${INSTALL_DDIR} --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib      --disable-wx --strip && make -j$cpu && make install"
+MP4BOX="gpac  0.4.5 http://downloads.sourceforge.net/project/gpac/GPAC/GPAC%200.4.5/gpac-0.4.5.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fgpac%2F&ts=1297411317&use_mirror=citylan gpac-0.4.5.tar.gz gpac   chmod +x configure && ./configure --prefix=${INSTALL_DDIR} --extra-cflags=-I${INSTALL_DDIR}/include/ --extra-ldflags=-L${INSTALL_DDIR}/lib      --disable-wx --strip && make -j$cpu && make install"
 
 #64bit processor bug fix A52DEC
 ARCh=`arch`
